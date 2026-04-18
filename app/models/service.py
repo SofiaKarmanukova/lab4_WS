@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, Text, Float, DateTime
-from sqlalchemy.sql import func
+from sqlalchemy import Column, Integer, String, Float, Text, Boolean, DateTime
+from sqlalchemy.orm import relationship
+from datetime import datetime
 from app.core.database import Base
 
 
@@ -7,12 +8,13 @@ class Service(Base):
     __tablename__ = "services"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(255), nullable=False)
+    name = Column(String, nullable=False, index=True)
     description = Column(Text, nullable=True)
-    duration = Column(Integer, nullable=False)
     price = Column(Float, nullable=False)
-    category = Column(String(100), nullable=False)
-    status = Column(String(50), nullable=False, default="active")
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-    deleted_at = Column(DateTime(timezone=True), nullable=True)
+    duration_minutes = Column(Integer, nullable=False)
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    # Relationships
+    appointments = relationship("Appointment", back_populates="service")

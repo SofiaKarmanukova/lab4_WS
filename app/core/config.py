@@ -1,41 +1,39 @@
-import os
-from typing import Optional
-from dotenv import load_dotenv
 from pydantic_settings import BaseSettings
-
-load_dotenv()
+from typing import Optional
 
 
 class Settings(BaseSettings):
-    # Database
-    DATABASE_URL: str = "postgresql://postgres:postgres@localhost:5432/spa_db"
-
     # Application
-    PORT: int = 8000
-    APP_NAME: str = "SPA Salon API"
     ENVIRONMENT: str = "development"
+
+    # Database
+    DB_USER: str = "postgres"
+    DB_PASSWORD: str = "postgres"
+    DB_NAME: str = "spa_db"
+    DB_HOST: str = "localhost"
+    DB_PORT: int = 5432
 
     # JWT
     JWT_ACCESS_SECRET: str = "super_secret_access_key_change_in_prod"
     JWT_REFRESH_SECRET: str = "super_secret_refresh_key_change_in_prod"
-    JWT_ACCESS_EXPIRATION: int = 15  # minutes
-    JWT_REFRESH_EXPIRATION: int = 7 * 24 * 60  # minutes (7 days)
-
-    # Session (для OAuth)
-    SESSION_SECRET: str = "your_session_secret_key_here"
+    JWT_ACCESS_EXPIRATION: int = 15  # минут
+    JWT_REFRESH_EXPIRATION: int = 10080  # минут (7 дней)
 
     # OAuth Yandex
-    YANDEX_CLIENT_ID: str = "2d625c05258d4ca0ac07c74f0d6f6954"
-    YANDEX_CLIENT_SECRET: str = "558ee78782884857aefa1eea025a2ff7"
+    YANDEX_CLIENT_ID: str = ""
+    YANDEX_CLIENT_SECRET: str = ""
     YANDEX_REDIRECT_URI: str = "http://localhost:8000/api/v1/auth/oauth/yandex/callback"
-    YANDEX_AUTH_URL: str = "https://oauth.yandex.ru/authorize"
-    YANDEX_TOKEN_URL: str = "https://oauth.yandex.ru/token"
-    YANDEX_USER_INFO_URL: str = "https://login.yandex.ru/info"
+
+    # Session
+    SESSION_SECRET: str = "your_super_secret_key_here"
+
+    @property
+    def DATABASE_URL(self) -> str:
+        return f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
 
     class Config:
         env_file = ".env"
-        env_file_encoding = "utf-8"
-        extra = "ignore"
+        case_sensitive = True
 
 
 settings = Settings()
