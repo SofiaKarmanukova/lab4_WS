@@ -1,7 +1,7 @@
 # SPA Salon API
 
 <p align="center">
-  <img src="assets/icon.png" alt="SPA Salon API" width="120">
+  <img src="assets/SPA.png" alt="SPA Salon API" width="120">
 </p>
 
 <h3 align="center">REST API для SPA-салона на FastAPI</h3>
@@ -564,49 +564,4 @@ pip install -r requirements.txt
 * защиту приватных эндпоинтов;
 * хранение токенов в HttpOnly cookies.
 
----
-
-## Загрузка на GitHub
-
-Перед загрузкой проекта нужно добавить `.gitignore`.
-
-Пример:
-
-```gitignore
-venv/
-.venv/
-__pycache__/
-*.pyc
-.env
-.idea/
-.vscode/
-*.log
-```
-
-Команды для первого коммита:
-
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-```
-
-Подключение к GitHub:
-
-```bash
-git branch -M main
-git remote add origin https://github.com/USERNAME/REPOSITORY.git
-git push -u origin main
-```
-
-Если `origin` уже существует:
-
-```bash
-git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
-git push -u origin main
-```
-
----
-
-
-[1]: https://habr.com/ru/articles/649363/ "Оформляем README-файл профиля на GitHub / Хабр"
+https://habr.com/ru/articles/649363/ "Оформляем README-файл профиля на GitHub / Хабр"
