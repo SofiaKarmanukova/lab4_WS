@@ -5,3 +5,4 @@ alembic==1.12.1
 python-dotenv==1.0.0
 pydantic-settings==2.1.0
 email-validator
+httpx==0.27.0
